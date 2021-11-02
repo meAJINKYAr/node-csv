@@ -1,0 +1,16 @@
+<%- include('../base') %>
+<div class="container m-3 p-3">
+    <form method="POST" action="/books" class="form">
+        <label for="title">title</label>
+        <input type="text" name="title" id="title" class="form-control">
+        <label for="isbn">ISBN</label>
+        <input type="text" name="isbn" id="isbn" class="form-control">
+        <label for="authors">authors</label>
+        <input type="text" name="authors" id="authors" class="form-control">
+        <label for="description">description</label>
+        <textarea name="description" id="description" class="form-control" rows="4"></textarea>
+        <br>
+        <button type="submit" class="btn btn-success">ADD</button>
+    </form>
+    <br><a href="/books"><button class="btn btn-danger">Cancel</button></a>
+</div>

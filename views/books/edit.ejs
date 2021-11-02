@@ -1,0 +1,16 @@
+<%- include('../base') %>
+<div class="container m-3 p-3">
+    <form method="POST" action="/books/edit/<%= book[0].id %>" class="form">
+        <label for="title">title</label>
+        <input type="text" name="title" id="title" class="form-control" value="<%= book[0].title %>">
+        <label for="isbn">ISBN</label>
+        <input type="text" name="isbn" id="isbn" class="form-control" value="<%= book[0].isbn %>">
+        <label for="authors">authors</label>
+        <input type="text" name="authors" id="authors" class="form-control" value="<%= book[0].authors %>">
+        <label for="description">description</label>
+        <input name="description" id="description" class="form-control" rows="4" value="<%= book[0].description %>">
+        <br>
+        <button type="submit" class="btn btn-success">ADD</button>
+    </form>
+    <br><a href="/books"><button class="btn btn-danger">Cancel</button></a>
+</div>

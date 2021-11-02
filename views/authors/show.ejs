@@ -1,0 +1,60 @@
+<%- include('../base') %>
+<div class="container m-3 p-3">
+    <div class="row">
+        <form class="form col" method="POST" action="/authors/upload" enctype="multipart/form-data">
+            <label>Upload CSV data to Database</label>
+            <input type="file" name="authors_csv" id="authors_csv" class="form-control" accept="csv"><br>
+            <button class="btn btn-success" type="submit">upload</button>
+        </form>
+        <form class="form col" method="GET" action="/authors/download" enctype="multipart/form-data">
+            <label>Import CSV data from Database</label><br>
+            <!-- <input type="text" name="filename" id="filename" class="form-control"><br> -->
+            <button class="btn btn-primary" type="submit">download</button>
+        </form>
+        <form class="form col" method="GET" action="/authors/add">
+            <label>Add More Authors to Database</label><br>
+            <button class="btn btn-primary" type="submit">Add More</button>
+        </form>
+    </div><br>
+    <div>
+        <hr>
+        <form action="/authors/search" method="POST" class="form row">
+            
+            <h5 class='col-2'>Search Author</h5>
+            <% if(page === 'search'){ %>
+                <input type="text" class="form-control col-6 m-1" name="search_term" id="search_term" value="<%= search_data %>">
+            <% } else { %>
+                <input type="text" class="form-control col-6 m-1" name="search_term" id="search_term">
+            <% } %>
+            <button type="submit" class="btn btn-info col-1 m-1">search</button>
+        </form>
+        <hr>
+    </div>
+    <div class=""><b>Total rows: <%= data.length %></b></div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>EMAIL</th>
+                <th>FIRSTNAME</th>
+                <th>LASTNAME</th>
+                <th>ACTTION</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let i=0;i< data.length;i++){ %>
+                <tr>
+                    <td><%= data[i].id %></td>
+                    <td><%= data[i].email %></td>
+                    <td><%= data[i].firstname %></td>
+                    <td><%= data[i].lastname %></td>
+                    <td>
+                        <a href="/authors/edit/<%= data[i].id %>"><i class="fa fa-edit" data-toggle="tooltip" title="Edit"></i></a>
+                        <a href="/authors/delete/<%= data[i].id %>"><i class="fas fa-trash-alt" data-toggle="tooltip" title="Delete"></i></a>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+   
+</div>

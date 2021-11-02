@@ -1,0 +1,33 @@
+<%- include('base') %>
+<div class="container m-3 p-3">
+    <h3>List of Books and Magazines Ordered by Title</h3>
+    <div class=""><b>Total rows: <%= data.length %></b></div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>ISBN</th>
+                <th>AUTHORS</th>
+                <th>CATEGORY</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(data) { %>
+                <% for(let i=0;i< data.length;i++){ %>
+                    <tr>
+                        <td><%= data[i].id %></td>
+                        <td><%= data[i].title %></td>
+                        <td><%= data[i].isbn %></td>
+                        <td><%= data[i].authors %></td>
+                        <td><%= data[i].category %></td>
+                    </tr>
+                <% } %>
+            <% }else{ %>
+                <tr>
+                    <td>NO DATA FOUND!</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>

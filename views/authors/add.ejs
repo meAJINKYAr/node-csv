@@ -1,0 +1,14 @@
+<%- include('../base') %>
+<div class="container m-3 p-3">
+    <form method="POST" action="/authors" class="form">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" class="form-control">
+        <label for="firstname">Firstname</label>
+        <input type="text" name="firstname" id="firstname" class="form-control">
+        <label for="lastname">Lastname</label>
+        <input type="text" name="lastname" id="lastname" class="form-control">
+        <br>
+        <button type="submit" class="btn btn-success">ADD</button>
+    </form>
+    <br><a href="/authors"><button class="btn btn-danger">Cancel</button></a>
+</div>
