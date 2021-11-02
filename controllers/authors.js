@@ -126,15 +126,15 @@ const deleteAuthor = (req,res)=>{
 }
 
 const download = (req,res) => {
-    conn.connect(error => {
-        if (error) throw error;
+    // conn.connect(error => {
+    //     if (error) throw error;
       
         // query data from MySQL
         conn.query("SELECT * FROM authors", function(error, data, fields) {
           if (error) throw error;
       
           const jsonData = JSON.parse(JSON.stringify(data));
-          console.log("jsonData", jsonData);
+          //console.log("jsonData", jsonData);
       
           fastcsv
             .write(jsonData, { headers: true,delimiter:';' })
@@ -150,7 +150,7 @@ const download = (req,res) => {
             })
             .pipe(ws)
         });
-    });
+    //});
 }
 
 module.exports = {
