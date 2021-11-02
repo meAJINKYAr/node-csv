@@ -10,7 +10,7 @@ const upload = async (req,res) => {
         }
 
         let magazines = [];
-        let path = __basedir + "/raftlabs_test/static/uploads/" + req.file.filename;
+        let path = "./static/uploads/" + req.file.filename;
 
         fs.createReadStream(path)
             .pipe(fastcsv.parse({headers: true,delimiter:';'}))
@@ -40,19 +40,6 @@ const upload = async (req,res) => {
                     })
                 }
                 return res.redirect('/magazines');
-                //console.log("bulk magazine create done!");
-                // magazines.bulkCreate()
-                //     .then(()=>{
-                //         res.status(200).send({
-                //             message: "Uploaded the file successfully: " + req.file.originalname,
-                //         });
-                //     })
-                //     .catch((error)=>{
-                //         res.status(500).send({
-                //             message: "Fail to import data into database!",
-                //             error: error.message,
-                //         });
-                //     });
             });
 
     } catch (error) {

@@ -11,7 +11,8 @@ const csvFilter = (req, file, cb) => {
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, __basedir + "/raftlabs_test/static/uploads/");
+    //cb(null, __basedir + "/raftlabs_test/static/uploads/");
+    cb(null, "./static/uploads/");
   },
   filename: (req, file, cb) => {
     console.log(file.originalname);

@@ -10,7 +10,7 @@ const upload = async (req,res) => {
         }
 
         let authors = [];
-        let path = __basedir + "/raftlabs_test/static/uploads/" + req.file.filename;
+        let path = "./static/uploads/" + req.file.filename;
 
         fs.createReadStream(path)
             .pipe(fastcsv.parse({headers: true,delimiter:';'}))
