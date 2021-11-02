@@ -2,6 +2,7 @@ const conn = require('../models/db.js');
 const fs = require("fs");
 const fastcsv = require("fast-csv");
 const ws = fs.createWriteStream("./static/downloads/magazines.csv");
+const jsonToCSV = require('json-2-csv');
 
 const upload = async (req,res) => {
     try {
@@ -137,24 +138,24 @@ const download = (req,res) => {
       
         // query data from MySQL
         conn.query("SELECT * FROM magazines", function(error, data, fields) {
-          if (error) throw error;
-      
-          const jsonData = JSON.parse(JSON.stringify(data));
-          //console.log("jsonData", jsonData);
-      
-          fastcsv
-            .write(jsonData, { headers: true,delimiter:';' })
-            .on("finish", function() {
-                console.log("Write to magazines.csv successfully!");
-
-                fs.readFile('./static/downloads/magazines.csv',fastcsv,function(err,data){
-                    if(err) throw err;
-                    res.setHeader('Content-disposition', 'attachment; filename=magazines.csv');
-                    res.set('Content-Type', 'text/csv');
-                    res.status(200).send(data)
-                })
+            if (error) throw error;
+        
+            const jsonData = JSON.parse(JSON.stringify(data));
+            //console.log("jsonData", jsonData);
+        
+            jsonToCSV.json2csv(jsonData,(err,csv)=>{
+                if(err) throw err;
+                //console.log(csv);
+                fs.writeFileSync('./static/downloads/magazines.csv', csv);
             })
-            .pipe(ws)
+
+            //console.log("DONE");
+            fs.readFile('./static/downloads/magazines.csv','utf-8',function(err,data){
+                if(err) throw err;
+                res.setHeader('Content-disposition', 'attachment; filename=magazines.csv');
+                res.set('Content-Type', 'text/csv');
+                res.status(200).send(data)
+            })
         });
     //});
 }
